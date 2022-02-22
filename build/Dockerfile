@@ -210,7 +210,7 @@ ARG NAP_MODULES=none
 
 # copy oidc files on plus build
 RUN --mount=target=/tmp [ -n "${BUILD_OS##*plus*}" ] && exit 0; mkdir -p etc/nginx/oidc/ && cp -a /tmp/internal/configs/oidc/* /etc/nginx/oidc/
-    sed -i 's/r.variables.session_jwt\s=\stokenset.id_token;/r.variables.session_jwt = tokenset.access_token;/g' /etc/nginx/oidc/openid_connect.js
+    && sed -i 's/r.variables.session_jwt\s=\stokenset.id_token;/r.variables.session_jwt = tokenset.access_token;/g' /etc/nginx/oidc/openid_connect.js
 
 # run only on nap waf build
 RUN --mount=target=/tmp [ -n "${NAP_MODULES##*waf*}" ] && exit 0; mkdir -p /etc/nginx/waf/nac-policies /etc/nginx/waf/nac-logconfs /etc/nginx/waf/nac-usersigs /var/log/app_protect /opt/app_protect \
